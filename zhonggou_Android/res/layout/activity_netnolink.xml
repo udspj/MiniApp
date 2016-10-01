@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/messagetext"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="80dp"
+        android:gravity="center"
+        android:text="温馨提示" />
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="网络错误，请检查网络设置 " />
+    
+    <Button
+        android:id="@+id/buttonin"
+        android:layout_width="134dp"
+        android:layout_height="40dp"
+        android:textColor="#ffffff"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center_horizontal"
+        android:text="确认进入"
+        android:background="@drawable/btnimgtext" />
+    
+    <Button
+        android:id="@+id/buttonnetset"
+        android:layout_width="134dp"
+        android:layout_height="40dp"
+        android:textColor="#ffffff"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center_horizontal"
+        android:text="网络设置"
+        android:background="@drawable/btnimgtext" />
+    
+    <Button
+        android:id="@+id/buttonout"
+        android:layout_width="134dp"
+        android:layout_height="40dp"
+        android:textColor="#ffffff"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center_horizontal"
+        android:text="退回首页"
+        android:background="@drawable/btnimgtext" />
+
+</LinearLayout>
