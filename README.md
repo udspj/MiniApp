@@ -1,2 +1,4 @@
 # MiniApp
-Base MiniApp for iOS &amp; Android
+Base MiniApp for iOS & Android source
+
+iOS & Android source code is under construction
