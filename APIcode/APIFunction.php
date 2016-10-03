@@ -47,9 +47,22 @@ class APIFunction {
 	function getShopDetailDatas($param_get) {
 		$whereTemp = "";
 		$whereTemp = 'industry'."='".$param_get['industry']."'";
+
 		$page_index = $param_get['page'];
 		if(!$page_index) {
 			$page_index = 0;
+		}
+
+		$coordla = 0.0;
+		$coordlo = 0.0;
+		if($param_get['coordx'] && $param_get['coordy']) {
+			$coordla = $param_get['coordy'];
+			$coordlo = $param_get['coordx'];
+		}
+
+		$dis = 10000000000;
+		if($param_get['distance']) {
+			$dis = (int)str_replace("m","",$param_get['distance']);	
 		}
 
 // list total count
@@ -62,11 +75,19 @@ class APIFunction {
 // list detail data
 		$per_page = 5;
 		$start_index = $page_index * $per_page;
-		// echo ceil($totalcount/$per_page);
-		$sqlstr = "SELECT SQL_CALC_FOUND_ROWS * FROM shop_detail LIMIT $start_index, 5";
+		$sqlstr = "SELECT SQL_CALC_FOUND_ROWS * FROM shop_detail";// LIMIT $start_index, 5";
 		if($whereTemp != "") {
-			$sqlstr = "SELECT SQL_CALC_FOUND_ROWS * FROM shop_detail WHERE $whereTemp LIMIT $start_index, $per_page";
+			$sqlstr = $sqlstr." WHERE $whereTemp";// LIMIT $start_index, $per_page";
 		}
+		if($param_get['coordx'] && $param_get['coordy']) {
+			if($whereTemp != "") {
+				$sqlstr = $sqlstr." AND ";
+			}else{
+				$sqlstr = $sqlstr." WHERE ";
+			}
+			$sqlstr = $sqlstr."sqrt( ( ((113.914619-$coordlo)*PI()*12656*cos(((22.50128+$coordla)/2)*PI()/180)/180) * ((113.914619-$coordlo)*PI()*12656*cos (((22.50128+$coordla)/2)*PI()/180)/180) ) + ( ((22.50128-$coordla)*PI()*12656/180) * ((22.50128-$coordla)*PI()*12656/180) ) )<$dis";
+		}
+		$sqlstr = $sqlstr." LIMIT $start_index, $per_page";
 		$sqlreslut = mysql_query($sqlstr);
 		$apires = array();
 		while($row = mysql_fetch_assoc($sqlreslut)) {
@@ -78,6 +99,8 @@ class APIFunction {
 		echo json_encode($result);
 
 		// coordx=121.22&coordy=31.33&page=\u8bf7\u9009\u62e9&industry=\u9644\u8fd11000\u7c73
+
+		// sqrt( ( ((113.914619-coordx)*PI()*12656*cos(((22.50128+coordy)/2)*PI()/180)/180) * ((113.914619-coordx)*PI()*12656*cos (((22.50128+coordy)/2)*PI()/180)/180) ) + ( ((22.50128-coordy)*PI()*12656/180) * ((22.50128-coordy)*PI()*12656/180) ) )<2000000
 	}
 
 	function distance($lat1, $lng1, $lat2, $lng2){

@@ -19,6 +19,7 @@ if ($action == "industry") {
 }
 
 // http://serverurl/select_api.php?industry=type1&page=1
+// http://serverurl/select_api.php?industry=type1&page=0&coordx=121.22&coordy=31.33&distance=100000m
 // http://serverurl/select_api.php?action=industry
 // http://serverurl/select_api.php?action=distance
 
